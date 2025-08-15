@@ -12,7 +12,11 @@ __________________________________________________________
 Why did I make this project?
 -
 __________________________________________________________
-This project was made by using ____ (python language, python library/moduels pygame, sns)
+This project was made by using the language Python and Python libraries/modules PyGame, Sys and Random.
+* Python: The coding language used to make this project.   
+* PyGame: The primary Python Library used for this project. This library helped in creating the main structure of the pong game. It allowed for me to display various sprites on the game's screen, as well as creating physics for the objects created.  
+* Sys (System): Python module used for interacting with Python runtime environment. Also helped in debugging the code.
+* Random: The Python module used for areas involving randomising. In my project, I used it to generate random RGB colors to contribute the "epilepsy" effect in my game.
 __________________________________________________________
 While making this project, I was faced with different challenges.   
 * Challenge 1: (insert here)

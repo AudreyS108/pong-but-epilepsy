@@ -24,20 +24,43 @@ pygame.display.set_caption("Pong but epilepsy")
 clock = pygame.time.Clock()
 
 # da paddles
-playerone = pygame.Rect(width - 110, (height/2) - 50, 10, 100)
-playertwo = pygame.Rect(110, (height/2) - 50, 10, 100)
+playerone = pygame.Rect(110, (height/2) - 50, 10, 100)
+playertwo = pygame.Rect(width - 110, (height/2) - 50, 10, 100)
+
 
 
 #Pygame loop
 while True:
-    # Quit Pygame window
+    # --------Quit Pygame window--------
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
     #--- end pygame window quit
 
+    # --------Paddle movement!----------
+    
+    keyspressed = pygame.key.get_pressed()
+
+    # Player One controls
+    if keyspressed[pygame.K_w]:
+        if playerone.bottom < height:
+            playerone.top += 2 # Flipped controls contrary to real world logistics: designed to be extra confusing
+    elif keyspressed[pygame.K_s]:
+        if playerone.top > 0:
+            playerone.bottom -= 2
+        
+    # Player Two controls
+    if keyspressed[pygame.K_UP]:
+        if playertwo.bottom < height:
+            playertwo.top += 2 
+    elif keyspressed[pygame.K_DOWN]:
+        if playertwo.top > 0:
+            playertwo.bottom -= 2
+
+
     #------------SCREEN FILLS:-----------
+    # Screen must be filled to prevent any weird trails
     # epilepsy mode:
     #screen.fill(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))  
     # normal mode
@@ -49,5 +72,5 @@ while True:
 
     pygame.display.update()
     # clock.tick : Frames per second
-    clock.tick(100) 
+    clock.tick(300) 
     
