@@ -9,8 +9,9 @@ What it is
 -
 This Python project is a fun game featuring many different technical elements and game modes. Here's a breakdown of the game:
 __________________________________________________________
-Why did I make this project?
+Personal Project Evaluation and Reflection
 -
+I decided to make this project for a fun technology week competition at my school. The theme of the competition was "chaos". Since my projects weren't usually silly, I was sort of stumped on what to do. Eventually, a friend of mine (also participating in the game competition) suggested to give the viewer epilepsy by switching the background colors constantly and by using a wide range of sounds. Genius. Because of this, I decided to create a simple pong game, but with an epilepsy factor. Simple, yet absolutely wacky. Also, I recently learned how to create games using Pygame, so I used it to make my project. Due to the limited time participants had to create their games for the competition, I only managed to add the main epilepsy factor and working pong game elements. At some point after the competition, I found the unfinished game sitting in my computer files. So, I chose to complete it and present the complete version of Pong But Epilepsy, which included a functional game menu and toggles. 
 __________________________________________________________
 This project was made by using the language Python and Python libraries/modules PyGame, Sys and Random.
 * Python: The coding language used to make this project.   
@@ -23,7 +24,7 @@ While making this project, I was faced with different challenges.
 
 I think through the creation of this project ___
 __________________________________________________________
-Project Stats:
+Project Stats
 -
 * Time spent: __hrs __ mins
 * Code editor used: VS Code
