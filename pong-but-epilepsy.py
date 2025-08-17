@@ -23,11 +23,18 @@ screen.fill("black")
 pygame.display.set_caption("Pong but epilepsy")
 clock = pygame.time.Clock()
 
+font = pygame.font.SysFont("Arial", 30)
+
 # da paddles
 playerone = pygame.Rect(110, (height/2) - 50, 10, 100)
 playertwo = pygame.Rect(width - 110, (height/2) - 50, 10, 100)
 
+#Player scores
+p1score = 0
+p2score = 0
 
+ball = pygame.Rect((width/2) - 10, (height/2) - 10, 20, 20)
+xspeed, yspeed = random.choice([-1, 1]), random.choice([-1, 1])
 
 #Pygame loop
 while True:
@@ -57,7 +64,30 @@ while True:
     elif keyspressed[pygame.K_DOWN]:
         if playertwo.top > 0:
             playertwo.bottom -= 2
+    
+    # --------Ball physics------------
+    if ball.y >= height:
+        yspeed = -1
+    if ball.y <= 0:
+        yspeed = 1
 
+    if ball.x <= 0: #Left side
+        ball.center = width/2, height/2
+        xspeed = random.choice([-1, 1])
+        yspeed = random.choice([-1, 1])
+
+    if ball.x >= width: #right side
+        ball.center = width/2, height/2
+        xspeed = random.choice([-1, 1])
+        yspeed = random.choice([-1, 1])
+    
+    if ball.colliderect(playerone) and ball.x < playerone.right:
+        xspeed = 1
+    if ball.colliderect(playertwo) and ball.x < playertwo.left:
+        xspeed = -1
+
+    ball.x += xspeed * 1.4
+    ball.y += yspeed * 1.4
 
     #------------SCREEN FILLS:-----------
     # Screen must be filled to prevent any weird trails
@@ -69,8 +99,10 @@ while True:
     # draw the player paddles
     pygame.draw.rect(screen, "white", playerone)
     pygame.draw.rect(screen, "white", playertwo)
+    pygame.draw.circle(screen, "white", ball.center, 10)
 
     pygame.display.update()
     # clock.tick : Frames per second
-    clock.tick(300) 
+    clock.tick(300)
+
     
