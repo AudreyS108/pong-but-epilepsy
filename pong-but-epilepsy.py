@@ -24,8 +24,6 @@ screen.fill("black")
 pygame.display.set_caption("Pong but epilepsy")
 clock = pygame.time.Clock()
 
-font = pygame.font.SysFont("Arial", 30)
-
 # da paddles
 PlayerOne = pygame.Rect(110, (height/2) - 50, 10, 100)
 PlayerTwo = pygame.Rect(width - 110, (height/2) - 50, 10, 100)
@@ -37,89 +35,313 @@ p2score = 0
 ball = pygame.Rect((width/2) - 10, (height/2) - 10, 20, 20)
 xspeed, yspeed = random.choice([-1, 1]), random.choice([-1, 1])
 
-#Pygame loop
-while True:
+def MainMenu():
+    font = pygame.font.SysFont("Arial", 60)
+
+    while True:
+        pygame.display.set_caption("Pong but epilepsy - Main Menu")
+        screen.fill("black")
+
+        MousePosition = pygame.mouse.get_pos()
+
+        MenuText = font.render("Pong but epilepsy", True, "white")
+        MenuRect = MenuText.get_rect(center=(width/2, 100))
+
+        mx,my = pygame.mouse.get_pos()
+
+        PlayButton = pygame.Rect(width/2 - 100, 200, 250, 75)
+        ChaosPlayButton = pygame.Rect(width/2 - 100, 400, 250, 75)
+        QuitButton = pygame.Rect(width/2 - 100, 600, 250, 75)
+
+        if PlayButton.collidepoint(mx, my):
+            pygame.draw.rect(screen, "grey", PlayButton)
+        else:
+            pygame.draw.rect(screen, "white", PlayButton)
+
+        if ChaosPlayButton.collidepoint(mx, my):
+            pygame.draw.rect(screen, "grey", ChaosPlayButton)
+        else:
+            pygame.draw.rect(screen, "white", ChaosPlayButton)
+
+        if QuitButton.collidepoint(mx, my):
+            pygame.draw.rect(screen, "grey", QuitButton)
+        else:
+            pygame.draw.rect(screen, "white", QuitButton)
+  
+        screen.blit(MenuText, MenuRect)
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            #detects when mouse button is down runs through buttons
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PlayButton.collidepoint(event.pos):
+                    play()
+                elif ChaosPlayButton.collidepoint(event.pos):
+                    chaosplay()
+                elif QuitButton.collidepoint(event.pos):
+                    pygame.quit()
+                    sys.exit()
+
+        pygame.display.update()
+        clock.tick(200)
+
+def play():
+    font = pygame.font.SysFont("Arial", 30)
+
+    pygame.display.set_caption("Pong but epilepsy - Normal Mode")
+
+# da paddles
+    PlayerOne = pygame.Rect(110, (height/2) - 50, 10, 100)
+    PlayerTwo = pygame.Rect(width - 110, (height/2) - 50, 10, 100)
+
+#Player scores
+    p1score = 0
+    p2score = 0
+
+    ball = pygame.Rect((width/2) - 10, (height/2) - 10, 20, 20)
+    xspeed, yspeed = random.choice([-1, 1]), random.choice([-1, 1])
+
+    while True:
+    
     # --------Quit Pygame window--------
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                MainMenu()
     #--- end pygame window quit
+
+    #Winning scores
+        if p1score >= 10 or p2score >= 10:
+            endscreen()
 
     # --------Paddle movement!----------
 
-    keyspressed = pygame.key.get_pressed()
+        keyspressed = pygame.key.get_pressed()
 
     # Player One controls
-    if keyspressed[pygame.K_w]:
-        if PlayerOne.bottom < height:
-            PlayerOne.top += 2 # Flipped controls contrary to real world logistics: designed to be extra confusing
-    elif keyspressed[pygame.K_s]:
-        if PlayerOne.top > 0:
-            PlayerOne.bottom -= 2
+        if keyspressed[pygame.K_s]:
+            if PlayerOne.bottom < height:
+                PlayerOne.top += 2 # Flipped controls contrary to real world logistics: designed to be extra confusing
+        elif keyspressed[pygame.K_w]:
+            if PlayerOne.top > 0:
+                PlayerOne.bottom -= 2
 
     # Player Two controls
-    if keyspressed[pygame.K_UP]:
-        if PlayerTwo.bottom < height:
-            PlayerTwo.top += 2 
-    elif keyspressed[pygame.K_DOWN]:
-        if PlayerTwo.top > 0:
-            PlayerTwo.bottom -= 2
+        if keyspressed[pygame.K_DOWN]:
+            if PlayerTwo.bottom < height:
+                PlayerTwo.top += 2 
+        elif keyspressed[pygame.K_UP]:
+            if PlayerTwo.top > 0:
+                PlayerTwo.bottom -= 2
     
     # --------Ball physics------------
-    if ball.y >= height:
-        yspeed = random.choice([-2, -1])
-    if ball.y <= 0:
-        yspeed = random.choice([1, 2])
+        if ball.y >= height:
+            yspeed = -1
+        if ball.y <= 0:
+            yspeed = 1
 
-    if ball.x <= 0: #Left side
-        ball.center = width/2, height/2
-        xspeed = random.choice([-1, 1])
-        yspeed =  random.choice([-2, -1, 1, 2])
-        p1score += 1 #update the score
-        print("Player 1 score:", p1score, ", Player 2 score:", p2score)
+        if ball.x <= 0: #Left side
+            ball.center = width/2, height/2
+            xspeed = random.choice([-1, 1])
+            yspeed =  random.choice([-1, 1])
+            p2score += 1 #update the score
+            print("Player 1 score:", p1score, ", Player 2 score:", p2score)
 
-    if ball.x >= width: #right side
-        ball.center = width/2, height/2
-        xspeed = random.choice([-1, 1])
-        yspeed =  random.choice([-2, -1, 1, 2])
-        p2score += 1 #update the score
-        print("Player 1 score:", p1score, ", Player 2 score:", p2score)
+        if ball.x >= width: #right side
+            ball.center = width/2, height/2
+            xspeed = random.choice([-1, 1])
+            yspeed =  random.choice([-2, -1, 1, 2])
+            p1score += 1 #update the score
+            print("Player 1 score:", p1score, ", Player 2 score:", p2score)
     
-    if ball.colliderect(PlayerOne) and ball.x < PlayerOne.right:
-        xspeed = 1
-    if ball.colliderect(PlayerTwo) and ball.x < PlayerTwo.left:
-        xspeed = -1
+        if ball.colliderect(PlayerOne) and ball.x < PlayerOne.right:
+            xspeed = 1
+        if ball.colliderect(PlayerTwo) and ball.x < PlayerTwo.left:
+            xspeed = -1
 
-    ball.x += xspeed * 1.4
-    ball.y += yspeed * 1.4
+        ball.x += xspeed * 1.4
+        ball.y += yspeed * 1.4
+
+    #------------SCREEN FILLS:-----------
+    # Screen must be filled to prevent any weird trails
+    # normal mode
+        screen.fill("black")
+
+    # ----------SCORES DISPLAY-----------
+        scoreboardtext = font.render("Scoreboard", True, "white")
+        p1text = font.render(str("Player 1: " + str(p1score)), True, "white")
+        p2text = font.render(str("Player 2: " + str(p2score)), True, "white")
+    
+        scoreboardrect = scoreboardtext.get_rect(center=(width/2, 50))
+        p1_rect = p1text.get_rect(center=(width/2 - 200, 80))
+        p2_rect = p2text.get_rect(center=(width/2 + 200, 80))
+
+        SpaceText = font.render("Press SPACE to return to the main menu", True, "white")
+        Spacerect = SpaceText.get_rect(center=(width/2, height - 100))
+
+
+    # draw the player paddles
+        pygame.draw.rect(screen, "white", PlayerOne)
+        pygame.draw.rect(screen, "white", PlayerTwo)
+        pygame.draw.circle(screen, "white", ball.center, 10)
+
+        screen.blit(p1text, p1_rect)
+        screen.blit(p2text, p2_rect)
+        screen.blit(scoreboardtext, scoreboardrect)
+        screen.blit(SpaceText, Spacerect)
+
+        pygame.display.update()
+    # clock.tick : Frames per second
+        clock.tick(300)
+
+def chaosplay():
+    font = pygame.font.SysFont("Arial", 30)
+
+    pygame.display.set_caption("Pong but epilepsy - Epilepsy Mode")
+
+# da paddles
+    PlayerOne = pygame.Rect(110, (height/2) - 50, 10, 100)
+    PlayerTwo = pygame.Rect(width - 110, (height/2) - 50, 10, 100)
+
+#Player scores
+    p1score = 0
+    p2score = 0
+
+    ball = pygame.Rect((width/2) - 10, (height/2) - 10, 20, 20)
+    xspeed, yspeed = random.choice([-1, 1]), random.choice([-1, 1])
+
+    while True:
+    
+    # --------Quit Pygame window--------
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                MainMenu()
+    #--- end pygame window quit
+
+        if p1score >= 10 or p2score >= 10:
+            endscreen()
+
+    # --------Paddle movement!----------
+
+        keyspressed = pygame.key.get_pressed()
+
+    # Player One controls
+        if keyspressed[pygame.K_w]:
+            if PlayerOne.bottom < height:
+                PlayerOne.top += 2 # Flipped controls contrary to real world logistics: designed to be extra confusing
+        elif keyspressed[pygame.K_s]:
+            if PlayerOne.top > 0:
+                PlayerOne.bottom -= 2
+
+    # Player Two controls
+        if keyspressed[pygame.K_UP]:
+            if PlayerTwo.bottom < height:
+                PlayerTwo.top += 2 
+        elif keyspressed[pygame.K_DOWN]:
+            if PlayerTwo.top > 0:
+                PlayerTwo.bottom -= 2
+    
+    # --------Ball physics------------
+        if ball.y >= height:
+            yspeed = random.choice([-2, -1])
+        if ball.y <= 0:
+            yspeed = random.choice([1, 2])
+
+        if ball.x <= 0: #Left side
+            ball.center = width/2, height/2
+            xspeed = random.choice([-1, 1])
+            yspeed =  random.choice([-2, -1, 1, 2])
+            p2score += 1 #update the score
+            print("Player 1 score:", p1score, ", Player 2 score:", p2score)
+
+        if ball.x >= width: #right side
+            ball.center = width/2, height/2
+            xspeed = random.choice([-1, 1])
+            yspeed =  random.choice([-2, -1, 1, 2])
+            p1score += 1 #update the score
+            print("Player 1 score:", p1score, ", Player 2 score:", p2score)
+    
+        if ball.colliderect(PlayerOne) and ball.x < PlayerOne.right:
+            xspeed = 1
+        if ball.colliderect(PlayerTwo) and ball.x < PlayerTwo.left:
+            xspeed = -1
+
+        ball.x += xspeed * 1.4
+        ball.y += yspeed * 1.4
 
     #------------SCREEN FILLS:-----------
     # Screen must be filled to prevent any weird trails
     # epilepsy mode:
-    #screen.fill(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))  
-    # normal mode
-    screen.fill("black")
+        screen.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))  
 
     # ----------SCORES DISPLAY-----------
-    scoreboardtext = font.render("Scoreboard", True, "white")
-    p1text = font.render(str("Player 1: " + str(p1score)), True, "white")
-    p2text = font.render(str("Player 2: " + str(p1score)), True, "white")
+        scoreboardtext = font.render("Scoreboard", True, "white")
+        p1text = font.render(str("Player 1: " + str(p1score)), True, "white")
+        p2text = font.render(str("Player 2: " + str(p2score)), True, "white")
     
-    scoreboardrect = scoreboardtext.get_rect(center=(width/2, 50))
-    p1_rect = p1text.get_rect(center=(width/2 - 200, 80))
-    p2_rect = p2text.get_rect(center=(width/2 + 200, 80))
+        scoreboardrect = scoreboardtext.get_rect(center=(width/2, 50))
+        p1_rect = p1text.get_rect(center=(width/2 - 200, 80))
+        p2_rect = p2text.get_rect(center=(width/2 + 200, 80))
+
+        SpaceText = font.render("Press SPACE to return to the main menu", True, "white")
+        Spacerect = SpaceText.get_rect(center=(width/2, height - 100))
 
 
     # draw the player paddles
-    pygame.draw.rect(screen, "white", PlayerOne)
-    pygame.draw.rect(screen, "white", PlayerTwo)
-    pygame.draw.circle(screen, "white", ball.center, 10)
+        pygame.draw.rect(screen, "white", PlayerOne)
+        pygame.draw.rect(screen, "white", PlayerTwo)
+        pygame.draw.circle(screen, "white", ball.center, 10)
 
-    screen.blit(p1text, p1_rect)
-    screen.blit(p2text, p2_rect)
-    screen.blit(scoreboardtext, scoreboardrect)
+        screen.blit(p1text, p1_rect)
+        screen.blit(p2text, p2_rect)
+        screen.blit(scoreboardtext, scoreboardrect)
+        screen.blit(SpaceText, Spacerect)
+
+        pygame.display.update()
+    # clock.tick : Frames per second
+        clock.tick(300)
+
+def endscreen():
+    font = pygame.font.SysFont("Arial", 60)
+    screen.fill("black")
+
+    winner_text = font.render("Player __ wins!", True, "white")
+    
+    # Display the winner
+    if p1score >= 10:
+        winner_text = font.render("Player 1 wins!", True, "white")
+    elif p2score >= 10:
+        winner_text = font.render("Player 2 wins!", True, "white")
+
+    winner_rect = winner_text.get_rect(center=(width/2, height + 600))
+    
+    # Display the final scores
+    score_text = font.render(f"Final Score - Player 1: {p1score}, Player 2: {p2score}", True, "white")
+    score_rect = score_text.get_rect(center=(width/2, height/2 + 50))
+
+    SpaceText = font.render("Press SPACE to return to the main menu", True, "white")
+    Spacerect = SpaceText.get_rect(center=(width/2, height - 100))
+
+    screen.blit(winner_text, winner_rect)
+    screen.blit(score_text, score_rect)
+    screen.blit(SpaceText, Spacerect)
 
     pygame.display.update()
-    # clock.tick : Frames per second
-    clock.tick(300)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                MainMenu()
+
+
+MainMenu()
