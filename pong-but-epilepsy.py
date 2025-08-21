@@ -1,12 +1,13 @@
 #PLAN:
-#1. Have main pong game which is functional
-#2. Add epilepsy effect by flashing the screen with random rgb colors
-#3. Add a "First to ___ points wins" system + game over screen declaring the winner.
-#4. Create a main menu to start game
-#5. Add Epilepsy and non epilepsy modes (incl epilepsy warning)
+#1. Have main pong game which is functional {DONE}
+#2. Add epilepsy effect by flashing the screen with random rgb colors {DONE}
+#3. Add a "First to ___ points wins" system + game over screen declaring the winner. {PARTWAY}
+#4. Create a main menu to start game {DONE}
+#5. Add Epilepsy and non epilepsy modes {DONE}
 #6. Possibly add a "How to play" screen
 #7. Possibly add a pong bot with AI - single player
 #6. Optional: Add sound effects and music
+#8. oPTIonal: add extra bal for epipesy mode
 #Thats it for now
 
 
@@ -37,6 +38,7 @@ xspeed, yspeed = random.choice([-1, 1]), random.choice([-1, 1])
 
 def MainMenu():
     font = pygame.font.SysFont("Arial", 60)
+    fontsmall = pygame.font.SysFont("Arial", 30)
 
     while True:
         pygame.display.set_caption("Pong but epilepsy - Main Menu")
@@ -45,13 +47,25 @@ def MainMenu():
         MousePosition = pygame.mouse.get_pos()
 
         MenuText = font.render("Pong but epilepsy", True, "white")
-        MenuRect = MenuText.get_rect(center=(width/2, 100))
+        MenuRect = MenuText.get_rect(center=(width/2 + 20, 100))
 
         mx,my = pygame.mouse.get_pos()
 
         PlayButton = pygame.Rect(width/2 - 100, 200, 250, 75)
         ChaosPlayButton = pygame.Rect(width/2 - 100, 400, 250, 75)
         QuitButton = pygame.Rect(width/2 - 100, 600, 250, 75)
+
+
+        playbuttontext = fontsmall.render("Play Normal Mode", True, "black")
+        chaosbuttontext = fontsmall.render("Play Epilepsy Mode", True, (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+        quitbuttontext = fontsmall.render("Quit Game", True, "black")
+
+        PBrect = playbuttontext.get_rect(center = ((width/2 + 25), 235))
+        CBrect = playbuttontext.get_rect(center = ((width/2 + 20), 435))
+        QBrect = playbuttontext.get_rect(center = ((width/2 + 60), 635))
+
+        
+
 
         if PlayButton.collidepoint(mx, my):
             pygame.draw.rect(screen, "grey", PlayButton)
@@ -83,6 +97,10 @@ def MainMenu():
                 elif QuitButton.collidepoint(event.pos):
                     pygame.quit()
                     sys.exit()
+
+        screen.blit(playbuttontext, PBrect)
+        screen.blit(chaosbuttontext, CBrect)
+        screen.blit(quitbuttontext, QBrect)
 
         pygame.display.update()
         clock.tick(200)
@@ -140,9 +158,9 @@ def play():
     
     # --------Ball physics------------
         if ball.y >= height:
-            yspeed = -1
+            yspeed = random.choice([-1, -2])
         if ball.y <= 0:
-            yspeed = 1
+            yspeed = random.choice([1, 2])
 
         if ball.x <= 0: #Left side
             ball.center = width/2, height/2
@@ -255,7 +273,7 @@ def chaosplay():
             yspeed = random.choice([1, 2])
 
         if ball.x <= 0: #Left side
-            ball.center = width/2, height/2
+            ball.center = width/2, height/234
             xspeed = random.choice([-1, 1])
             yspeed =  random.choice([-2, -1, 1, 2])
             p2score += 1 #update the score
@@ -313,6 +331,8 @@ def endscreen():
     screen.fill("black")
 
     winner_text = font.render("Player __ wins!", True, "white")
+    print(p1score)
+    print(p2score)
     
     # Display the winner
     if p1score >= 10:
@@ -342,6 +362,10 @@ def endscreen():
                 sys.exit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 MainMenu()
+
+def howtoplay():
+    font = pygame.font.SysFont("Arial", 40)
+    
 
 
 MainMenu()
