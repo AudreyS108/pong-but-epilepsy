@@ -29,7 +29,6 @@ clock = pygame.time.Clock()
 PlayerOne = pygame.Rect(110, (height/2) - 50, 10, 100)
 PlayerTwo = pygame.Rect(width - 110, (height/2) - 50, 10, 100)
 
-#Player scores
 p1score = 0
 p2score = 0
 
@@ -51,18 +50,21 @@ def MainMenu():
 
         mx,my = pygame.mouse.get_pos()
 
-        PlayButton = pygame.Rect(width/2 - 100, 200, 250, 75)
-        ChaosPlayButton = pygame.Rect(width/2 - 100, 400, 250, 75)
-        QuitButton = pygame.Rect(width/2 - 100, 600, 250, 75)
+        PlayButton = pygame.Rect(width/2 - 100, 200, 250, 55)
+        ChaosPlayButton = pygame.Rect(width/2 - 100, 350, 250, 55)
+        HowToplaybutton = pygame.Rect(width/2 - 100, 500, 250, 55)
+        QuitButton = pygame.Rect(width/2 - 100, 650, 250, 55)
 
 
         playbuttontext = fontsmall.render("Play Normal Mode", True, "black")
         chaosbuttontext = fontsmall.render("Play Epilepsy Mode", True, (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+        HowToplaytext = fontsmall.render("How to Play", True, "black")
         quitbuttontext = fontsmall.render("Quit Game", True, "black")
 
         PBrect = playbuttontext.get_rect(center = ((width/2 + 25), 235))
-        CBrect = playbuttontext.get_rect(center = ((width/2 + 20), 435))
-        QBrect = playbuttontext.get_rect(center = ((width/2 + 60), 635))
+        CBrect = playbuttontext.get_rect(center = ((width/2 + 20), 385))
+        HTPBrect = playbuttontext.get_rect(center = ((width/2 + 60), 535))
+        QBrect = playbuttontext.get_rect(center = ((width/2 + 70), 685))
 
         
 
@@ -76,6 +78,11 @@ def MainMenu():
             pygame.draw.rect(screen, "grey", ChaosPlayButton)
         else:
             pygame.draw.rect(screen, "white", ChaosPlayButton)
+
+        if HowToplaybutton.collidepoint(mx, my):
+            pygame.draw.rect(screen, "grey", HowToplaybutton)
+        else:
+            pygame.draw.rect(screen, "white", HowToplaybutton)
 
         if QuitButton.collidepoint(mx, my):
             pygame.draw.rect(screen, "grey", QuitButton)
@@ -94,18 +101,24 @@ def MainMenu():
                     play()
                 elif ChaosPlayButton.collidepoint(event.pos):
                     chaosplay()
+                elif HowToplaybutton.collidepoint(event.pos):
+                    howtoplay()
                 elif QuitButton.collidepoint(event.pos):
                     pygame.quit()
                     sys.exit()
 
         screen.blit(playbuttontext, PBrect)
         screen.blit(chaosbuttontext, CBrect)
+        screen.blit(HowToplaytext, HTPBrect)
         screen.blit(quitbuttontext, QBrect)
 
         pygame.display.update()
         clock.tick(200)
 
 def play():
+    global p1score
+    global p2score
+
     font = pygame.font.SysFont("Arial", 30)
 
     pygame.display.set_caption("Pong but epilepsy - Normal Mode")
@@ -222,6 +235,10 @@ def chaosplay():
     pygame.display.set_caption("Pong but epilepsy - Epilepsy Mode")
 
 # da paddles
+
+    global p1score
+    global p2score
+
     PlayerOne = pygame.Rect(110, (height/2) - 50, 10, 100)
     PlayerTwo = pygame.Rect(width - 110, (height/2) - 50, 10, 100)
 
@@ -327,30 +344,35 @@ def chaosplay():
         clock.tick(300)
 
 def endscreen():
+    global p1score
+    global p2score
+    
     font = pygame.font.SysFont("Arial", 60)
     screen.fill("black")
 
-    winner_text = font.render("Player __ wins!", True, "white")
+    winnertext = font.render("Player __ wins!", True, "white")
     print(p1score)
     print(p2score)
     
     # Display the winner
     if p1score >= 10:
-        winner_text = font.render("Player 1 wins!", True, "white")
+        winnertext = font.render("Player 1 wins!", True, "white")
     elif p2score >= 10:
-        winner_text = font.render("Player 2 wins!", True, "white")
+       winnertext = font.render("Player 2 wins!", True, "white")
+    
+    print(winnertext)
 
-    winner_rect = winner_text.get_rect(center=(width/2, height + 600))
+    winnerrect = winnertext.get_rect(center=(width/2, height/2 - 200))
     
     # Display the final scores
-    score_text = font.render(f"Final Score - Player 1: {p1score}, Player 2: {p2score}", True, "white")
-    score_rect = score_text.get_rect(center=(width/2, height/2 + 50))
+    scoretext = font.render(f"Final Score - Player 1: {p1score}, Player 2: {p2score}", True, "white")
+    scorerect = scoretext.get_rect(center=(width/2, height/2 + 50))
 
     SpaceText = font.render("Press SPACE to return to the main menu", True, "white")
     Spacerect = SpaceText.get_rect(center=(width/2, height - 100))
 
-    screen.blit(winner_text, winner_rect)
-    screen.blit(score_text, score_rect)
+    screen.blit(winnertext, winnerrect)
+    screen.blit(scoretext, scorerect)
     screen.blit(SpaceText, Spacerect)
 
     pygame.display.update()
@@ -364,8 +386,53 @@ def endscreen():
                 MainMenu()
 
 def howtoplay():
-    font = pygame.font.SysFont("Arial", 40)
+    font = pygame.font.SysFont("Arial", 30)
     
+    
+    screen.fill("black")
 
+    Text = font.render("The aim of the game is to score points by deflecting the ball with your paddle better than your opponent.", True, "white")
+    rect = Text.get_rect(center=(width/2, height - 650))
+
+    NormText = font.render("In Normal mode:", True, "white")
+    Normrect = NormText.get_rect(center=(width/2, height - 550))
+
+    NormTextTwo = font.render("Press UP or W to go up, and DOWN or S to go down.", True, "white")
+    NormrectTwo = NormTextTwo.get_rect(center=(width/2, height - 500))
+
+    EpModeText = font.render("In Epilepsy mode the controls are reversed:", True, "white")
+    EpModerect = EpModeText.get_rect(center=(width/2, height - 450))
+
+    EpModeTextOne = font.render("Press UP or W to go down, and DOWN or S to go up.", True, "white")
+    EpModerectOne = EpModeTextOne.get_rect(center=(width/2, height - 350))
+
+    EpModeTextTwo = font.render("(This is just to make you rage more lol)", True, "white")
+    EpModerectTwo = EpModeTextTwo.get_rect(center=(width/2, height - 300))
+
+    EpModeTextThree = font.render("First to score 10 points wins!", True, "white")
+    EpModerectThree = EpModeTextThree.get_rect(center=(width/2, height - 200))
+
+    SpaceText = font.render("Press SPACE to return to the main menu", True, "white")
+    Spacerect = SpaceText.get_rect(center=(width/2, height - 100))
+
+    screen.blit(NormText, Normrect)
+    screen.blit(NormTextTwo, NormrectTwo)
+    screen.blit(EpModeText, EpModerect)
+    screen.blit(EpModeTextTwo, EpModerectTwo)
+    screen.blit(EpModeTextOne, EpModerectOne)
+    screen.blit(EpModeTextThree, EpModerectThree)
+    screen.blit(SpaceText, Spacerect)
+
+    screen.blit(Text, rect) 
+
+    pygame.display.update()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                MainMenu()
 
 MainMenu()
