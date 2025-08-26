@@ -11,6 +11,7 @@ This Python project is a fun game featuring many different technical elements an
 
 * A simple pong game where you try to score points by using paddles to deflect the ball into the opponent's goal. 
 * Different gamemodes: Normal mode and Epilepsy/Chaos mode. Epilepsy mode is like Normal mode, except the fact it is extra chaotic. Includes flashing lights as well as flipped controls (just to make the player rage even more. >:D)
+* Options for Singleplayer or multiplayer mode (for more variety!!)
 __________________________________________________________
 Personal Project Evaluation and Reflection
 -
@@ -27,9 +28,10 @@ __________________________________________________________
 While making this project, I was faced with different challenges.   
 * Challenge 1: Creating the physics of the game elements: paddles and balls. This was probably one of the most difficult parts of the project. Pygame doesn't come with its own physics, unlike other game development platforms such as Unity. I used some if/else loops to let the ball change direction when certain criteria (e.g. if the top of the ball touches the top of the screen) was met. 
 * Challenge 2: Small bug I had to fix. Occasionally, the ball wouldn't rebound properly off the top and bottom, and would disappear. I found the reason for this bug was because of an inaccuracy in some of my random.choice functions. Originally, when the ball touched the top of the screen, the ball had the possibility to move in a positive or negative gradient, which would cause the ball to ocassionally disappear off the screen. To fix it, I removed the positive gradients for when the ball touched the top of the screen, and vice-versa for when the ball touched the bottom of the screen.
-* Challenge 3: Creating the menu screens. After some research and some trial and error, I found the best way to accomplish this was by making each "screen" a seperate python function, and called each function when a certain button was pressed. I had 4 seperate screens branching off from the main menu: Normal mode, Epilepsy mode, How to play, and Quit. 
+* Challenge 3: Creating the menu screens. After some research and some trial and error, I found the best way to accomplish this was by making each "screen" a seperate python function, and called each function when a certain button was pressed. I had 4 seperate screens branching off from the main menu: Normal mode, Epilepsy mode, Bot normal mode, Bot Epilepsy mode, How to play, and Quit. 
+* Challenge 4: Creating a bot "AI" for singleplayer mode. This wasn't exactly an AI bot, but did follow some simple logic. IF the ball was higher than the bot paddle, the bot would move up, and vice versa if the ball was lower. 
 
-I think through the creation of this project _____
+I think through the creation of this project I have learned to successfully _____
 __________________________________________________________
 Project Stats
 -
