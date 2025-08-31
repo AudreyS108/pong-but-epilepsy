@@ -22,7 +22,7 @@ pygame.init()
 #music + sound effects
 pygame.mixer.init()
 
-ballsound1 = pygame.mixer.Sound("cartoon-jump-6462.mp3")
+ballsound1 = pygame.mixer.Sound("cartoon-jump.mp3")
 ballsound1.set_volume(0.5)
 channel1 = pygame.mixer.Channel(1)
 
@@ -30,6 +30,7 @@ bgmusicmenu = pygame.mixer.Sound("NyanCatoriginal.mp3")
 bgmusicmenu.set_volume(0.3)
 channel2 = pygame.mixer.Channel(2)
 channel2.play(bgmusicmenu, loops=-1) #also loops=-1 means it loops forever
+print("Playing musiccc ")
 
 ballsound2 = pygame.mixer.Sound("calk-tuah.mp3")
 ballsound2.set_volume(0.5)
@@ -38,6 +39,10 @@ channel3 = pygame.mixer.Channel(3)
 wowsound = pygame.mixer.Sound("anime-wow-sound-effect.mp3")
 wowsound.set_volume(0.5)
 channel4 = pygame.mixer.Channel(4)
+
+ballsound3 = pygame.mixer.Sound("skibidi-toilette.mp3")
+ballsound3.set_volume(0.5)
+channel5 = pygame.mixer.Channel(5)
 
 # Setting up screen dimensions
 width, height = 1280, 720
@@ -338,10 +343,10 @@ def chaosplay():
     # --------Ball physics------------
         if ball.y >= height:
             yspeed = random.choice([-2, -1])
-            channel3.play(ballsound2)
+            channel5.play(ballsound3)
         if ball.y <= 0:
             yspeed = random.choice([1, 2])
-            channel3.play(ballsound2)
+            channel5.play(ballsound3)
 
         if ball.x <= 0: #Left side
             ball.center = width/2, height/234
@@ -462,7 +467,7 @@ def endscreen2():
     if p1score >= 10:
         winnertext = font.render("Player wins! (W IN THE CHAT)", True, "white")
     elif p2score >= 10:
-       winnertext = font.render("Bot wins! (haha imagine)", True, "white")
+       winnertext = font.render("Bot wins! (haha imagine losing to a clanker)", True, "white")
     
     print(winnertext)
 
@@ -545,7 +550,7 @@ def botnorm():
 
     font = pygame.font.SysFont("Arial", 30)
 
-    pygame.display.set_caption("Pong but epilepsy - Normal Mode")
+    pygame.display.set_caption("Pong but epilepsy - Bot Normal Mode")
 
 # da paddles
     PlayerOne = pygame.Rect(110, (height/2) - 50, 10, 100)
@@ -661,7 +666,7 @@ def botEp():
 
     font = pygame.font.SysFont("Arial", 30)
 
-    pygame.display.set_caption("Pong but epilepsy - Normal Mode")
+    pygame.display.set_caption("Pong but epilepsy - Bot Epilepsy Mode")
 
 # da paddles
     PlayerOne = pygame.Rect(110, (height/2) - 50, 10, 100)
@@ -704,10 +709,10 @@ def botEp():
     # --------Ball physics------------
         if ball.y >= height:
             yspeed = random.choice([-1, -2])
-            channel3.play(ballsound2)
+            channel5.play(ballsound3)
         if ball.y <= 0:
             yspeed = random.choice([1, 2])
-            channel3.play(ballsound2)
+            channel5.play(ballsound3)
 
         if ball.x <= 0: #Left side
             ball.center = width/2, height/2

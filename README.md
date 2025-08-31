@@ -15,9 +15,18 @@ This Python project is a fun game featuring many different technical elements an
 * Options for Singleplayer or multiplayer mode (for more variety!!)
 * Random silly sounds to add to the chaos. 
 __________________________________________________________
+How To Operate
+-
+1. Go to the "Releases" section and select "App ver. of Pong But Epilepsy"  
+>  _____
+2. Click "__________" under "Assets" to download the application file.  
+> ______
+3. After the download, open the file and a terminal should pop up after a while. Soon, the main menu of the game will appear!   
+Note that closing the terminal which pops up with the game will cause the application to close. 
+__________________________________________________________
 Personal Project Evaluation and Reflection
 -
-I decided to make this project for a fun technology week competition at my school. The theme of the competition was "chaos". Since my projects weren't usually silly, I was sort of stumped on what to do. Eventually, a friend of mine (also participating in the game competition) suggested to give the viewer epilepsy by switching the background colors constantly and by using a wide range of sounds. Genius. Because of this, I decided to create a simple pong game, but with an epilepsy factor. Simple, yet absolutely wacky. Also, I recently learned how to create games using Pygame, so I used it to make my project. Due to the limited time participants had to create their games for the competition, I only managed to add the main epilepsy factor and working pong game elements. At some point after the competition, I found the unfinished game sitting in my computer files. So, I chose to complete it and present the complete version of Pong But Epilepsy, which included a functional game menu and toggles. 
+I decided to make this project for a fun technology week competition at my school. The theme of the competition was "chaos". Since my projects weren't usually silly, I was sort of stumped on what to do. Eventually, a friend of mine (also participating in the game competition) suggested to give the viewer epilepsy by switching the background colors constantly and by using a wide range of sounds. Genius. Because of this, I decided to create a simple pong game, but with an epilepsy factor. Simple, yet absolutely wacky. Also, I recently learned how to create games using Pygame, so I used it to make my project. Due to the limited time participants had to create their games for the competition, I only managed to add the main epilepsy factor and working pong game elements. At some point after the competition, I found the unfinished game sitting in my computer files. So, I chose to complete it and present the complete version of Pong But Epilepsy, which included a functional game menu, different game modes, and silly music + sound effects. 
 __________________________________________________________
 This project was made by using the coding language Python and many different Python Libraries.
  
@@ -38,7 +47,7 @@ I think through the creation of this project, I have learned to use a variety of
 __________________________________________________________
 Project Stats
 -
-* Time spent: 11 hrs 7 mins
+* Time spent: 11 hrs 16 mins
 * Code editor used: VS Code
 * Coding language(s): Python
 __________________________________________________________
