@@ -6,8 +6,10 @@
 #5. Add Epilepsy and non epilepsy modes {DONE}
 #6. Possibly add a "How to play" screen {DONE}
 #7. Possibly add a pong bot with AI - single player {DONE}
-#8. Optional: Add sound effects and music
+#8. Optional: Add sound effects and music {DONE}
 #Thats it for now
+
+#WOOOOO YAYEYYYYYYYYYYYYYYYYYYYYY AM DONE
 
 
 import pygame
@@ -16,6 +18,27 @@ import random
 from time import sleep
 
 pygame.init()
+
+#music + sound effects
+pygame.mixer.init()
+
+ballsound1 = pygame.mixer.Sound("cartoon-jump-6462.mp3")
+ballsound1.set_volume(0.5)
+channel1 = pygame.mixer.Channel(1)
+
+bgmusicmenu = pygame.mixer.Sound("NyanCatoriginal.mp3")
+bgmusicmenu.set_volume(0.3)
+channel2 = pygame.mixer.Channel(2)
+channel2.play(bgmusicmenu, loops=-1) #also loops=-1 means it loops forever
+
+ballsound2 = pygame.mixer.Sound("calk-tuah.mp3")
+ballsound2.set_volume(0.5)
+channel3 = pygame.mixer.Channel(3)
+
+wowsound = pygame.mixer.Sound("anime-wow-sound-effect.mp3")
+wowsound.set_volume(0.5)
+channel4 = pygame.mixer.Channel(4)
+
 # Setting up screen dimensions
 width, height = 1280, 720
 
@@ -197,8 +220,10 @@ def play():
     # --------Ball physics------------
         if ball.y >= height:
             yspeed = random.choice([-1, -2])
+            channel1.play(ballsound1)
         if ball.y <= 0:
             yspeed = random.choice([1, 2])
+            channel1.play(ballsound1)
 
         if ball.x <= 0: #Left side
             ball.center = width/2, height/2
@@ -216,8 +241,10 @@ def play():
     
         if ball.colliderect(PlayerOne) and ball.x < PlayerOne.right:
             xspeed = 1
+            channel1.play(ballsound1)
         if ball.colliderect(PlayerTwo) and ball.x < PlayerTwo.left:
             xspeed = -1
+            channel1.play(ballsound1)
 
         ball.x += xspeed * 1.4
         ball.y += yspeed * 1.4
@@ -311,8 +338,10 @@ def chaosplay():
     # --------Ball physics------------
         if ball.y >= height:
             yspeed = random.choice([-2, -1])
+            channel3.play(ballsound2)
         if ball.y <= 0:
             yspeed = random.choice([1, 2])
+            channel3.play(ballsound2)
 
         if ball.x <= 0: #Left side
             ball.center = width/2, height/234
@@ -330,8 +359,10 @@ def chaosplay():
     
         if ball.colliderect(PlayerOne) and ball.x < PlayerOne.right:
             xspeed = 1
+            channel3.play(ballsound2)
         if ball.colliderect(PlayerTwo) and ball.x < PlayerTwo.left:
             xspeed = -1
+            channel3.play(ballsound2)
 
         ball.x += xspeed * 1.4
         ball.y += yspeed * 1.4
@@ -376,6 +407,8 @@ def endscreen():
     font = pygame.font.SysFont("Arial", 60)
     screen.fill("black")
 
+    channel4.play(wowsound)
+
     winnertext = font.render("Player __ wins!", True, "white")
     print(p1score)
     print(p2score)
@@ -418,6 +451,8 @@ def endscreen2():
     
     font = pygame.font.SysFont("Arial", 60)
     screen.fill("black")
+
+    channel4.play(wowsound)
 
     winnertext = font.render("Player __ wins!", True, "white")
     print(p1score)
@@ -470,7 +505,7 @@ def howtoplay():
     NormrectTwo = NormTextTwo.get_rect(center=(width/2, height - 500))
 
     EpModeText = font.render("In Epilepsy mode the controls are reversed:", True, "white")
-    EpModerect = EpModeText.get_rect(center=(width/2, height - 450))
+    EpModerect = EpModeText.get_rect(center=(width/2, height - 400))
 
     EpModeTextOne = font.render("Press UP or W to go down, and DOWN or S to go up.", True, "white")
     EpModerectOne = EpModeTextOne.get_rect(center=(width/2, height - 350))
@@ -553,8 +588,10 @@ def botnorm():
     # --------Ball physics------------
         if ball.y >= height:
             yspeed = random.choice([-1, -2])
+            channel1.play(ballsound1)
         if ball.y <= 0:
             yspeed = random.choice([1, 2])
+            channel1.play(ballsound1)
 
         if ball.x <= 0: #Left side
             ball.center = width/2, height/2
@@ -572,17 +609,19 @@ def botnorm():
     
         if ball.colliderect(PlayerOne) and ball.x < PlayerOne.right:
             xspeed = 1
+            channel1.play(ballsound1)
         if ball.colliderect(PlayerTwo) and ball.x < PlayerTwo.left:
             xspeed = -1
+            channel1.play(ballsound1)
 
         ball.x += xspeed * 1.4
         ball.y += yspeed * 1.4
 
     # BOT CONTROLS:
         if PlayerTwo.y < ball.y:
-            PlayerTwo.top += 2.3
+            PlayerTwo.top += 2.25
         if PlayerTwo.y > ball.y:
-            PlayerTwo.bottom -= 2.3
+            PlayerTwo.bottom -= 2.25
 
     #------------SCREEN FILLS:-----------
     # Screen must be filled to prevent any weird trails
@@ -665,8 +704,10 @@ def botEp():
     # --------Ball physics------------
         if ball.y >= height:
             yspeed = random.choice([-1, -2])
+            channel3.play(ballsound2)
         if ball.y <= 0:
             yspeed = random.choice([1, 2])
+            channel3.play(ballsound2)
 
         if ball.x <= 0: #Left side
             ball.center = width/2, height/2
@@ -684,17 +725,19 @@ def botEp():
     
         if ball.colliderect(PlayerOne) and ball.x < PlayerOne.right:
             xspeed = 1
+            channel3.play(ballsound2)
         if ball.colliderect(PlayerTwo) and ball.x < PlayerTwo.left:
             xspeed = -1
+            channel3.play(ballsound2)
 
         ball.x += xspeed * 1.4
         ball.y += yspeed * 1.4
 
     # BOT CONTROLS:
         if PlayerTwo.y < ball.y:
-            PlayerTwo.top += 2.3
+            PlayerTwo.top += 2.25
         if PlayerTwo.y > ball.y:
-            PlayerTwo.bottom -= 2.3
+            PlayerTwo.bottom -= 2.25
 
     #------------SCREEN FILLS:-----------
     # Screen must be filled to prevent any weird trails
