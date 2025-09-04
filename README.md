@@ -32,7 +32,7 @@ Note that closing the terminal which pops up with the game will cause the applic
 
 2. Unzip/extract the downloaded ZIP folder
    
-3. If you use Jupyter Notebook, follow these steps:
+3. Follow these steps:
  
 > Open VS Code, then through VS Code, open the unzipped/extracted folder, click in till you find "pong-but-epilepsy.py", and open that file.
 > In the terminal, input the following code:
