@@ -17,10 +17,13 @@ This Python project is a fun game featuring many different technical elements an
 __________________________________________________________
 How To Operate
 -
-1. Go to the "Releases" section and select "App ver. of Pong But Epilepsy"  
-2. Download all of the files there, and place them in a folder called "dist" in "Documents"
-3. After the download, open the file and a terminal should pop up after a while. Soon, the main menu of the game will appear!   
+1. Go to the "Releases" section and select "Pong But Epilepsy v1.1.0"  
+2. Download the "APP_VER_Pong-But-Epilepsy.exe" file, and the 5 .mp3 files. (Will take about 5 mins)
+3. Make a folder called "sounds", then place all the .mp3 files in that folder. (Make sure the .exe file and "sounds" folder are in the same area, e.g. both in "Downloads.")
+4. Find the .exe file and click into it.
+5. After the download, open the file and a terminal should pop up after a while. Soon, the main menu of the game will appear!   
 Note that closing the terminal which pops up with the game will cause the application to close.
+Done - have fun!
 
  **Alternate operating methods (only if above method fails!)** 
 <details>
@@ -67,12 +70,13 @@ While making this project, I was faced with different challenges.
 * Challenge 3: Creating the menu screens. After some research and some trial and error, I found the best way to accomplish this was by making each "screen" a seperate python function, and called each function when a certain button was pressed. I had 4 seperate screens branching off from the main menu: Normal mode, Epilepsy mode, Bot normal mode, Bot Epilepsy mode, How to play, and Quit. 
 * Challenge 4: Creating a bot "AI" for singleplayer mode. This wasn't exactly an "AI", but instead just a few if/else statements controlling the paddle movement. If the ball was higher than the bot paddle, the bot would move up, and vice versa if the ball was lower. 
 * Challenge 5: Adding music and sound effects. I did this by utilizing Pygame's built-in mixer function. By using different mixer channels, I could overlap background music and sound effects simultaneously!
+* Challenge 6: Shipping the project as a .exe application using PyInstaller. Although I used Pyinstaller before, I had never added music and sounds with it. After many tries and lots of technical difficulties, I managed to make the application work!
 
-I think through the creation of this project, I have learned to use a variety of different Python Libraries successfully (especially Pygame), as well as creating simple algorithms and functions. Additionally, I learnt how to create my own physics in Pygame, and play music using the Pygame sound & music mixer.  
+I think through the creation of this project, I have learned to use a variety of different Python Libraries successfully (especially Pygame), as well as creating simple algorithms and functions. Additionally, I learnt how to create my own physics in Pygame, and play music using the Pygame sound & music mixer. This project also definitely tested my resilience!
 __________________________________________________________
 Project Stats
 -
-* Time spent: 12 hrs 7 mins
+* Time spent: 12 hrs 36 mins
 * Code editor used: VS Code
 * Coding language(s): Python
 __________________________________________________________
