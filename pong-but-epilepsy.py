@@ -22,25 +22,25 @@ pygame.init()
 #music + sound effects
 pygame.mixer.init()
 
-ballsound1 = pygame.mixer.Sound("cartoon-jump.mp3")
+ballsound1 = pygame.mixer.Sound("sounds/cartoon-jump.mp3")
 ballsound1.set_volume(0.5)
 channel1 = pygame.mixer.Channel(1)
 
-bgmusicmenu = pygame.mixer.Sound("NyanCatoriginal.mp3")
+bgmusicmenu = pygame.mixer.Sound("sounds/NyanCatoriginal.mp3")
 bgmusicmenu.set_volume(0.3)
 channel2 = pygame.mixer.Channel(2)
 channel2.play(bgmusicmenu, loops=-1) #also loops=-1 means it loops forever
-print("Playing musiccc ")
+print("Sounds loaded!")
 
-ballsound2 = pygame.mixer.Sound("calk-tuah.mp3")
+ballsound2 = pygame.mixer.Sound("sounds/calk-tuah.mp3")
 ballsound2.set_volume(0.5)
 channel3 = pygame.mixer.Channel(3)
 
-wowsound = pygame.mixer.Sound("anime-wow-sound-effect.mp3")
+wowsound = pygame.mixer.Sound("sounds/anime-wow-sound-effect.mp3")
 wowsound.set_volume(0.5)
 channel4 = pygame.mixer.Channel(4)
 
-ballsound3 = pygame.mixer.Sound("skibidi-toilette.mp3")
+ballsound3 = pygame.mixer.Sound("sounds/skibidi-toilette.mp3")
 ballsound3.set_volume(0.5)
 channel5 = pygame.mixer.Channel(5)
 
