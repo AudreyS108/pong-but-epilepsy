@@ -18,12 +18,37 @@ __________________________________________________________
 How To Operate
 -
 1. Go to the "Releases" section and select "App ver. of Pong But Epilepsy"  
->  _____
-2. Click "__________" under "Assets" to download the application file.  
-> ______
+2. Download all of the files there, and place them in a folder called "dist" in "Documents"
 3. After the download, open the file and a terminal should pop up after a while. Soon, the main menu of the game will appear!   
-Note that closing the terminal which pops up with the game will cause the application to close. 
-__________________________________________________________
+Note that closing the terminal which pops up with the game will cause the application to close.
+
+ **Alternate operating methods (only if above method fails!)** 
+<details>
+<summary>Click to open!</summary>
+
+1. Press the green "Code" button. Select "Local" and then "Download ZIP"
+   
+> ![Step1](https://github.com/user-attachments/assets/f273659e-e287-4748-b895-fa7923775d2d)
+
+2. Unzip/extract the downloaded ZIP folder
+   
+3. If you use Jupyter Notebook, follow these steps:
+ 
+> Open VS Code, then through VS Code, open the unzipped/extracted folder, click in till you find "pong-but-epilepsy.py", and open that file.
+> In the terminal, input the following code:
+
+> ```pip install pygame```    
+> ```pip install sys```    
+> ```pip install random```    
+> ```pip install time ```  
+
+> (These commands are used to install the needed Python Libraries in order for the code to run as it should.)
+> You can now play the game! Run the code with the Python Debugger (keyboard shortcut Control + F5). A pygame window should pop up. Enjoy the fun! :P 
+> <img width="1857" height="943" alt="Screenshot 2025-09-04 145625" src="https://github.com/user-attachments/assets/6d5b6933-c31d-4092-ae5d-92edc85a27ea" />
+
+</details>  
+
+__________________________________________________________   
 Personal Project Evaluation and Reflection
 -
 I decided to make this project for a fun technology week competition at my school. The theme of the competition was "chaos". Since my projects weren't usually silly, I was sort of stumped on what to do. Eventually, a friend of mine (also participating in the game competition) suggested to give the viewer epilepsy by switching the background colors constantly and by using a wide range of sounds. Genius. Because of this, I decided to create a simple pong game, but with an epilepsy factor. Simple, yet absolutely wacky. Also, I recently learned how to create games using Pygame, so I used it to make my project. Due to the limited time participants had to create their games for the competition, I only managed to add the main epilepsy factor and working pong game elements. At some point after the competition, I found the unfinished game sitting in my computer files. So, I chose to complete it and present the complete version of Pong But Epilepsy, which included a functional game menu, different game modes, and silly music + sound effects. 
@@ -47,7 +72,7 @@ I think through the creation of this project, I have learned to use a variety of
 __________________________________________________________
 Project Stats
 -
-* Time spent: 11 hrs 16 mins
+* Time spent: 12 hrs 7 mins
 * Code editor used: VS Code
 * Coding language(s): Python
 __________________________________________________________
